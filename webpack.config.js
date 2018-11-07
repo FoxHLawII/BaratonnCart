@@ -9,6 +9,11 @@ module.exports = {
     path: path.resolve(__dirname, "public")
   },
   watch: true,
+  resolve: {
+    alias: {
+      Components: path.resolve(__dirname, 'src/components/')
+    }
+  },
   module: {
     rules: [
       {

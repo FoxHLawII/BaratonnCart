@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
 
+import MainNav from 'Components/pages/MainNav';
+
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {
+      categories: []
+    }
   }
-  render() { 
-    return ( 
+  componentDidMount() {
+    fetch('categories.json')
+      .then(function (response) {
+        return response.json();
+      })
+      .then((categories) => {
+        console.log(categories);
+        this.setState({ categories });
+      });
+  }
+  render() {
+    return (
       <div>
-        HII
+        <MainNav categories={this.state.categories}></MainNav>
       </div>
-     );
+    );
   }
 }
- 
+
 export default Main;
