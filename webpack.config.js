@@ -11,7 +11,8 @@ module.exports = {
   watch: true,
   resolve: {
     alias: {
-      Components: path.resolve(__dirname, 'src/components/')
+      Components: path.resolve(__dirname, 'src/components/'),
+      Util: path.resolve(__dirname, 'src/util/')
     }
   },
   module: {

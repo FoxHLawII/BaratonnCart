@@ -1,1 +1,16 @@
-"# BaratonnCart" 
+- Menu con categorias y subcategorias			OK
+- Filtros						NO
+	- Disponibilidad				NO
+	- Rango precios					NO
+	- Stock						NO
+- Ordenar						NO
+	- Precio					NO
+	- Disponibilidad				NO
+	- Stock						NO
+- Carro							NO
+	- Agragar item					NO
+	- Editar cantidad item				NO
+	- Eliminar item					NO
+- Guardar datos de carro aún con la pag cerrada		NO
+- Filtro de subcategorias por nombre			NO
+- Todo responsive					~
