@@ -20,9 +20,13 @@ const MainProducts = (props) => {
   }
   return (
     <div className="container">
-      <div className="row">
+      <div className="row text-center">
         <div className="col-sm-6">
-          <button onClick={() => { filterByAvailable(false); }}>asdasd</button>
+          <select onChange={(e) => { filterByAvailable(e.target.value); }}>
+            <option value="Todos">Todos</option>
+            <option value={true}>Disponibles</option>
+            <option value={false}>No disponibles</option>
+          </select>
         </div>
       </div>
       <div className="row text-center">
