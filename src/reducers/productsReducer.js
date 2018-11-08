@@ -9,10 +9,17 @@ export function productsReducer(state = initialState, action) {
     case actionTypes.PRODUCTS_SET_ALL:
       return { ...state, products: action.payload, filteredProducts: action.payload };
     case actionTypes.PRODUCTS_FILTER_AVAILABLE:
-
-      const newState = Object.assign({}, state);
-      console.log('TCL: productsReducer -> state', state);
-      console.log('TCL: productsReducer -> newState', newState);
+      const newState = {...state};
+      if (action.payload != "Todos") {
+        newState.filteredProducts = state.products.filter(p => {
+          return p.available.toString() == action.payload;
+        });
+      } else {
+        newState.filteredProducts = state.products;
+      }
+      return { ...newState };
+    case actionTypes.PRODUCTS_FILTER_PRICE_RANGE:
+      const newState = { ...state };
       if (action.payload != "Todos") {
         newState.filteredProducts = state.products.filter(p => {
           return p.available.toString() == action.payload;

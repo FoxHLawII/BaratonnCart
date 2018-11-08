@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Card from 'Components/card/Card';
+import { filterByPriceRange } from '../../actions/productsActions';
 
 const MainProducts = (props) => {
   const { filterByAvailable } = props;
@@ -27,6 +28,9 @@ const MainProducts = (props) => {
             <option value={true}>Disponibles</option>
             <option value={false}>No disponibles</option>
           </select>
+        </div>
+        <div className="col-sm-6">
+          <input type="range" onChange={(e)=>{ filterByPriceRange(0, e.target.value)}}></input>
         </div>
       </div>
       <div className="row text-center">

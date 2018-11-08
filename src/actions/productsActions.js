@@ -15,9 +15,18 @@ export function getAllProducts() {
       });
   }
 }
-export function filterProductsByAvailable(available){
+export function filterProductsByAvailable(available) {
   return {
     type: actionTypes.PRODUCTS_FILTER_AVAILABLE,
     payload: available
+  }
+}
+export function filterByPriceRange(to, until) {
+  return {
+    type: actionTypes.PRODUCTS_FILTER_PRICE_RANGE,
+    payload: {
+      to,
+      until
+    }
   }
 }
