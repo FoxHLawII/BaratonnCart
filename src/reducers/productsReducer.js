@@ -5,11 +5,12 @@ const initialState = {
   filteredProducts: []
 }
 export function productsReducer(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case actionTypes.PRODUCTS_SET_ALL:
       return { ...state, products: action.payload, filteredProducts: action.payload };
     case actionTypes.PRODUCTS_FILTER_AVAILABLE:
-      const newState = {...state};
+      newState = {...state};
       if (action.payload != "Todos") {
         newState.filteredProducts = state.products.filter(p => {
           return p.available.toString() == action.payload;
@@ -19,7 +20,7 @@ export function productsReducer(state = initialState, action) {
       }
       return { ...newState };
     case actionTypes.PRODUCTS_FILTER_PRICE_RANGE:
-      const newState = { ...state };
+      newState = { ...state };
       if (action.payload != "Todos") {
         newState.filteredProducts = state.products.filter(p => {
           return p.available.toString() == action.payload;
