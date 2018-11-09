@@ -1,10 +1,13 @@
 import React from 'react';
+import { reduxForm } from 'redux-form';
 
-import Card from 'Components/card/Card';
 import { filterByPriceRange } from '../../actions/productsActions';
 
+import MainProductsFilter from './MainProductsFilter';
+import Card from 'Components/card/Card';
+
 const MainProducts = (props) => {
-  const { filterByAvailable } = props;
+  const { handleSubmitFilter } = props;
   const renderProducts = () => {
     const { products } = props;
     if (products) {
@@ -21,18 +24,7 @@ const MainProducts = (props) => {
   }
   return (
     <div className="container">
-      <div className="row text-center">
-        <div className="col-sm-6">
-          <select onChange={(e) => { filterByAvailable(e.target.value); }}>
-            <option value="Todos">Todos</option>
-            <option value={true}>Disponibles</option>
-            <option value={false}>No disponibles</option>
-          </select>
-        </div>
-        <div className="col-sm-6">
-          <input type="range" onChange={(e)=>{ filterByPriceRange(0, e.target.value)}}></input>
-        </div>
-      </div>
+      <MainProductsFilter onSubmit={handleSubmitFilter}/>
       <div className="row text-center">
         {
           renderProducts()

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getAllProducts, filterProductsByAvailable, filterByPriceRange } from '../../actions/productsActions';
+import { getAllProducts, filterProducts } from '../../actions/productsActions';
 import { getAllCategories } from '../../actions/categoriesActions';
 
 import MainNav from 'Components/pages/MainNav';
@@ -15,20 +15,16 @@ class Main extends Component {
       categories: [],
       products: []
     }
-    this.filterProductsByAvailable = this.filterProductsByAvailable.bind(this);
-    this.filterByPriceRange = this.filterByPriceRange.bind(this);
+    this.handleSubmitFilter = this.handleSubmitFilter.bind(this);
   }
   
   componentDidMount() {
     this.props.getAllCategories();
     this.props.getAllProducts();
   }
-  
-  filterProductsByAvailable(available){
-    this.props.filterProductsByAvailable(available);
-  }
-  filterByPriceRange(to, until){
-    this.props.filterByPriceRange(to, until);
+
+  handleSubmitFilter(data) {
+    this.props.filterProducts(data);
   }
 
   render() {
@@ -39,8 +35,7 @@ class Main extends Component {
         />
         <MainProducts 
           products={this.props.products}
-          filterByAvailable={this.filterProductsByAvailable}
-          filterByPriceRange={this.filterByPriceRange}
+          handleSubmitFilter={this.handleSubmitFilter}
         />
       </div>
     );
@@ -58,8 +53,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getAllCategories: getAllCategories,
     getAllProducts: getAllProducts,
-    filterProductsByAvailable: filterProductsByAvailable,
-    filterByPriceRange: filterByPriceRange
+    filterProducts: filterProducts
   }, dispatch);
 };
 
