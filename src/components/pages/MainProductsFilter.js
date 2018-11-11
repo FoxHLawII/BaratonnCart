@@ -2,13 +2,11 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import InputRange from "../inputRange/InputRange";
-import { debounce } from 'Util/utils';
 
 class MainProductsFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputRangeValue: { min: 2, max: 10 },
     }
   }
 
@@ -30,7 +28,7 @@ class MainProductsFilter extends React.Component {
             component={InputRange}
             props={{
               minValue: 0,
-              maxValue: 49999
+              maxValue: 50000
             }}
             name="priceRange" />
         </div>
@@ -45,7 +43,7 @@ class MainProductsFilter extends React.Component {
             name="stockRange" />
         </div>
         <div className="col-3 px-5">
-          <button className="btn btn-primary">Submit</button>
+          <button className="btn btn-primary">Filtrar</button>
         </div>
       </form>
     );
@@ -59,11 +57,11 @@ export default reduxForm({
     availability: "Todos",
     priceRange: {
       min: 0,
-      max: 50000
+      max: 49999
     },
     stockRange: {
       min: 0,
-      max: 1000
+      max: 999
     }
   }
 })(MainProductsFilter);

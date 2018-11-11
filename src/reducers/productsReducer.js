@@ -4,15 +4,15 @@ const initialState = {
   products: [],
   filteredProducts: []
 }
-const initialFilters= {
+const initialFilters = {
   availability: "Todos",
   priceRange: {
     min: 0,
-    max: 50000
+    max: 49999
   },
   stockRange: {
     min: 0,
-    max: 1000
+    max: 999
   }
 }
 export function productsReducer(state = initialState, action) {
@@ -23,21 +23,15 @@ export function productsReducer(state = initialState, action) {
     case actionTypes.PRODUCTS_FILTER:
       const { priceRange, stockRange, availability } = action.payload;
       newState = { ...state };
-      if (JSON.stringify(action.payload) !== JSON.stringify(initialFilters)){
-        const filterByPriceRange = state.products.filter(p => {
+      if (JSON.stringify(action.payload) !== JSON.stringify(initialFilters)) {
+        newState.filteredProducts = state.products.filter(p => {
           let price = p.price.replace("$", "").replace(",", "");
           price = parseInt(price);
-          return price >= priceRange.min && price <= priceRange.max;
+          let bolPrice = (price >= priceRange.min && price <= priceRange.max)
+          let bolAvai = (availability !== "Todos" ? p.available.toString() === availability : true);
+          let bolQua = (p.quantity >= stockRange.min && p.quantity <= stockRange.max);
+          return (bolPrice && bolAvai && bolQua);
         });
-        const filterByAvailability = state.products.filter(p => {
-          return availability!=="Todos"?p.available.toString() !== availability:true;
-        });
-        const filterByStockRange = state.products.filter(p => {
-          return p.stock >= stockRange.min && p.stock <= stockRange.max;
-        });
-        const allFiltered = filterByAvailability.concat(filterByPriceRange).concat(filterByStockRange);
-        console.log('TCL: productsReducer -> allFiltered', [...new Set(allFiltered)]);
-        newState.filteredProducts = [...new Set(allFiltered)];
       } else {
         newState.filteredProducts = state.products;
       }
