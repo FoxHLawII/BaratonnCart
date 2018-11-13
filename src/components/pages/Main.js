@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getAllProducts, filterProducts } from '../../actions/productsActions';
-import { getAllCategories } from '../../actions/categoriesActions';
+import { getAllProducts, filterProducts, sortProducts } from 'Actions/productsActions';
+import { getAllCategories } from 'Actions/categoriesActions';
+import { addItemToCart } from 'Actions/cartActions';
 
 import MainNav from 'Components/pages/MainNav';
 import MainProducts from 'Components/pages/MainProducts';
@@ -16,8 +17,9 @@ class Main extends Component {
       products: []
     }
     this.handleSubmitFilter = this.handleSubmitFilter.bind(this);
+    this.addProductToCart = this.addProductToCart.bind(this);
   }
-  
+
   componentDidMount() {
     this.props.getAllCategories();
     this.props.getAllProducts();
@@ -25,17 +27,25 @@ class Main extends Component {
 
   handleSubmitFilter(data) {
     this.props.filterProducts(data);
+    if (data.sortBy) {
+      this.props.sortProducts(data.sortBy);
+    }
+  }
+
+  addProductToCart(item) {
+    this.props.addItemToCart(item);
   }
 
   render() {
     return (
       <div>
-        <MainNav 
-          categories={this.props.categories} 
+        <MainNav
+          categories={this.props.categories}
         />
-        <MainProducts 
+        <MainProducts
           products={this.props.products}
           handleSubmitFilter={this.handleSubmitFilter}
+          addProductToCart={this.addProductToCart}
         />
       </div>
     );
@@ -53,7 +63,9 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getAllCategories: getAllCategories,
     getAllProducts: getAllProducts,
-    filterProducts: filterProducts
+    filterProducts: filterProducts,
+    sortProducts: sortProducts,
+    addItemToCart: addItemToCart
   }, dispatch);
 };
 

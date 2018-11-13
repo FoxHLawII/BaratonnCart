@@ -1,14 +1,14 @@
 - Menu con categorias y subcategorias			OK
-- Filtros						NO
-	- Disponibilidad				NO
-	- Rango precios					NO
-	- Stock						NO
-- Ordenar						NO
-	- Precio					NO
-	- Disponibilidad				NO
-	- Stock						NO
+- Filtros						OK
+	- Disponibilidad				OK
+	- Rango precios					OK
+	- Stock						OK
+- Ordenar						OK
+	- Precio					OK
+	- Disponibilidad				OK
+	- Stock						OK
 - Carro							NO
-	- Agragar item					NO
+	- Agregar item					NO
 	- Editar cantidad item				NO
 	- Eliminar item					NO
 - Guardar datos de carro aún con la pag cerrada		NO

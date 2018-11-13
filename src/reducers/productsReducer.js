@@ -36,6 +36,18 @@ export function productsReducer(state = initialState, action) {
         newState.filteredProducts = state.products;
       }
       return { ...newState };
+    case actionTypes.PRODUCTS_SORT:
+      const sortBy = action.payload;
+      newState = { ...state };
+      newState.filteredProducts.sort((a, b) => {
+        let compareOne = a[sortBy];
+        let compareTwo = b[sortBy];
+        if (sortBy === "price") {
+          compareOne = parseInt(compareOne.replace("$", "").replace(",", ""));
+          compareTwo = parseInt(compareTwo.replace("$", "").replace(",", ""));
+        }
+        return compareTwo - compareOne;
+      });
     default:
       return state;
   }

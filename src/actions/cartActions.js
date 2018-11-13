@@ -1,7 +1,8 @@
-//[{bookObject},{bookObject}]
-export function addToCart(products){
+import actionTypes from 'Util/constants';
+
+export function addItemToCart(item) {
   return {
-    type: 'ADD_TO_CART',
-    payload: [...products]
+    type: actionTypes.CART_ADD,
+    payload: item
   }
 }

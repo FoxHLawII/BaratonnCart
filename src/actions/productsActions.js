@@ -21,3 +21,9 @@ export function filterProducts(data) {
     payload: data
   }
 }
+export function sortProducts(property) {
+  return {
+    type: actionTypes.PRODUCTS_SORT,
+    payload: property
+  }
+}

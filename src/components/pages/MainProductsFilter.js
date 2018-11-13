@@ -14,15 +14,25 @@ class MainProductsFilter extends React.Component {
     return (
       <form
         onSubmit={this.props.handleSubmit}
-        className="form-row my-5 d-flex justify-content-center align-items-center text-center">
-        <div className="col-3 px-5">
-          <Field component="select" name="availability">
+        className="form-row my-4 d-flex justify-content-center align-items-center text-center">
+        <div className="col-12 col-sm-6 col-md-3 px-5">
+          <label>Orden ascendente</label>
+          <Field component="select" name="sortBy" className="form-control">
+            <option value>Sin orden</option>
+            <option value={'quantity'}>> Cantidad</option>
+            <option value={'available'}>> Disponibilidad</option>
+            <option value={'price'}>> Precio</option>
+          </Field>
+        </div>
+        <div className="col-12 col-sm-6 col-md-3 px-5">
+          <label>Disponibilidad</label>
+          <Field component="select" name="availability" className="form-control">
             <option value="Todos">Todos</option>
             <option value={true}>Disponibles</option>
             <option value={false}>No disponibles</option>
           </Field>
         </div>
-        <div className="col-3 px-5">
+        <div className="col-12 col-sm-6 col-md-3 px-5">
           <label>Precios</label>
           <Field
             component={InputRange}
@@ -32,7 +42,7 @@ class MainProductsFilter extends React.Component {
             }}
             name="priceRange" />
         </div>
-        <div className="col-3 px-5">
+        <div className="col-12 col-sm-6 col-md-3 px-5">
           <label>stock</label>
           <Field
             component={InputRange}
@@ -42,7 +52,7 @@ class MainProductsFilter extends React.Component {
             }}
             name="stockRange" />
         </div>
-        <div className="col-3 px-5">
+        <div className="col-12 px-5 py-4">
           <button className="btn btn-primary">Filtrar</button>
         </div>
       </form>
