@@ -12,6 +12,7 @@ const MainProducts = (props) => {
       return products.map((product) => {
         return (
           <div
+            key={product.id}
             className="col-12 col-sm-6 col-md-3"
             style={{ cursor: "pointer" }}
             onClick={() => { addProductToCart(product) }}>
