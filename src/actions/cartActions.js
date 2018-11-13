@@ -24,3 +24,8 @@ export function decreaseItem(id) {
     payload: id
   }
 }
+export function resetItems(){
+  return {
+    type: actionTypes.CART_RESET
+  }
+}

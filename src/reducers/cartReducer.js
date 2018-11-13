@@ -23,8 +23,8 @@ export function cartReducer(state = initialState, action) {
       }
       return newState;
     case actionTypes.CART_REMOVE:
-      newState = {...state};
-      const indexToRemove=newState.cart.findIndex((i)=>{
+      newState = { ...state };
+      const indexToRemove = newState.cart.findIndex((i) => {
         return i.item.id === action.payload;
       });
       newState.cart = [
@@ -33,9 +33,9 @@ export function cartReducer(state = initialState, action) {
       ];
       return newState;
     case actionTypes.CART_INCREASE_ITEM:
-      newState = {...state};
-      newState.cart = newState.cart.map((i)=>{
-        if(i.item.id===action.payload){
+      newState = { ...state };
+      newState.cart = newState.cart.map((i) => {
+        if (i.item.id === action.payload) {
           i.quantity++;
         }
         return i;
@@ -46,12 +46,16 @@ export function cartReducer(state = initialState, action) {
       newState.cart = newState.cart.filter((i) => {
         if (i.item.id === action.payload) {
           i.quantity--;
-          if(i.quantity===0){
+          if (i.quantity === 0) {
             return false;
           }
         }
         return true;
       });
+      return newState;
+    case actionTypes.CART_RESET:
+      newState = { ...state };
+      newState.cart = [];
       return newState;
     default:
       return state;

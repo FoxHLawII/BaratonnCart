@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { removeItem, increaseItem, decreaseItem } from 'Actions/cartActions.js'
+import { removeItem, increaseItem, decreaseItem, resetItems } from 'Actions/cartActions.js'
 
 class MainCart extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class MainCart extends Component {
   }
 
   render() {
+    let total=0;
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -20,11 +21,11 @@ class MainCart extends Component {
     });
     const renderItems = () => {
       const { items, removeItem, increaseItem, decreaseItem } = this.props;
-      console.log(!!items.length)
       if (!!items.length) {
         return items.map((i) => {
           let val = i.item.price.replace("$", "").replace(",", "");
           val = parseInt(val) * i.quantity;
+          total +=val;
           val = formatter.format(val);
           return (
             <CartItem key={i.item.id}>
@@ -57,7 +58,9 @@ class MainCart extends Component {
           }
         </CartBody>
         <CartFooter>
-          <div className="available">
+          <div className="total">
+            <span>Total: {formatter.format(total)}</span>
+            <button onClick={() => { this.props.resetItems()}}>Comprar</button>
           </div>
         </CartFooter>
       </CartWrapper>
@@ -94,9 +97,7 @@ const CartBody = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-    color: #9b9b9b;
-  div p {
-  }
+  color: #9b9b9b;
 `;
 
 const CartFooter = styled.div`
@@ -104,24 +105,19 @@ const CartFooter = styled.div`
   width: 100%;
   background-color: #9b9b9b;
   border-radius: 0 0 8px 8px;
-  display: flex;
-  justify-content: space-between;
-  .price, .available {
-    width: 50%;
-  }
-  .price {
-    border-right: 1px solid #fff;
+  .total {
+    display: flex;
+    justify-content: space-around;
     color: #fff;
-    font-weight: 600;
-    font-size: 19px;
+    font-weight: bold;
   }
-  .available {
-    border-left: 1px solid #fff;
-    color: #fff;
-    font-size: small;
-    padding-top: 5px;
-    background-color: ${props => props.available ? "#3dca00" : "#e9e9e9"};
-    color: ${props => props.available ? "#fff" : "#9b9b9b"}
+  .total button {
+    color: #9b9b9b;
+    background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 2px;
   }
 `;
 const CartItem = styled.div`
@@ -182,7 +178,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     removeItem: removeItem,
     increaseItem: increaseItem,
-    decreaseItem: decreaseItem
+    decreaseItem: decreaseItem,
+    resetItems: resetItems
   }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MainCart);
